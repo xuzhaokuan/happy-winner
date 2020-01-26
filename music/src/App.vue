@@ -48,9 +48,7 @@
       <div class="nav-in">
         <ul>
           <li>
-            <a href="#">
-              <em>推荐</em>
-            </a>
+            <router-link :to="{name:'home'}">推荐</router-link>
           </li>
           <li>
             <a href="#">
@@ -79,7 +77,10 @@
           </li>
         </ul>
       </div>
-      <div class="main"></div>
+      </div>
+      <div class="main">
+  <router-view></router-view>
+      </div>
       <footer>
         <div class="wrap">
           <div class="left">
@@ -116,19 +117,19 @@
           <div class="right" style="width: 330px; float:right;">
             <ul style="overflow:hidden;">
               <li>
-                <a href="//music.163.com/st/userbasic#/auth" >nihao</a>
+                <a href="//music.163.com/st/userbasic#/auth" ><img src="../src/images/p1.png" style="width:100%;" alt=""></a>
                 <span>用户认证</span>
               </li>
               <li style="margin-left:30px;">
-                <a href="//music.163.com/recruit" style="background:url(../../images/p2.png)"></a>
+                <a href="//music.163.com/recruit"><img src="../src/images/p2.png" style="width:100%;" alt=""></a>
                 <span>独立音乐人</span>
               </li>
               <li style="margin-left:30px;">
-                <a href="//music.163.com/web/reward" style="background:url(../../images/p3.png)"></a>
+                <a href="//music.163.com/web/reward"><img src="../src/images/p3.png" style="width:100%;" alt=""></a>
                 <span>赞赏</span>
               </li>
               <li style="margin-left:30px;">
-                <a href="//music.163.com/uservideo#/plan" style="background:url(../../images/p4.png)"></a>
+                <a href="//music.163.com/uservideo#/plan"><img src="../src/images/p4.png" style="width:100%;" alt=""></a>
                 <span>视频奖励</span>
               </li>
             </ul>
@@ -142,7 +143,7 @@
       <router-link to="/about">About</router-link>
     </div>-->
     <!-- <router-view /> -->
-  </div>
+  
 </template>
 <script>
 import Header from "../src/views/Home";
@@ -267,11 +268,16 @@ ul {
   border-radius: 20px;
 }
 .main {
-  min-height: 100px;
+
   background: skyblue;
 }
 footer {
   font-size: 12px;
+  position: relative;
+    height: 172px;
+    overflow: hidden;
+    border-top: 1px solid #d3d3d3;
+    background: #f2f2f2;
 }
 
 .wrap {
@@ -320,12 +326,14 @@ footer {
   width: 50px;
   height: 45px;
   margin: 0 auto;
+  background-size: 110px 450px;
 }
 .right ul li span {
   display: inline-block;
     margin: 5px 5px 0;
     width: 52px;
     height: 14px;
+    
 }
 </style>
  

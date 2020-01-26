@@ -1,92 +1,125 @@
 <template>
-  <div class="header">
-    <header>
-      <img src="../images/logo.png" alt />
-
-      <ul>
-        <li>
-          <span>
-            <a href="#">发现音乐</a>
-          </span>
-        </li>
-        <li>
-          <span>
-            <a href="#">我的音乐</a>
-          </span>
-        </li>
-        <li>
-          <span>
-            <a href="#">朋友</a>
-          </span>
-        </li>
-        <li>
-          <span>
-            <a href="#">商城</a>
-          </span>
-        </li>
-        <li>
-          <span>
-            <a href="#">音乐人</a>
-          </span>
-        </li>
-        <li>
-          <span>
-            <a href="#">下载客户端</a>
-          </span>
-        </li>
-      </ul>
-      <div class="search">
-        <el-input prefix-icon="el-icon-search" v-model="input" placeholder="音乐/视频/电台/用户"></el-input>
+  <div class="home">
+    <div class="banner" style="overflow:hidden;">
+      <div class="banner-1" ref="t">
+        <div class="banner-2">
+          <div class="block" style="float:left;">
+            <el-carousel>
+              <el-carousel-item v-for="(item,index) in banner" :key="index">
+                <h3 class="small">
+                  <img :src="item" alt />
+                </h3>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+          <div style="overflow:hidden;">
+            <img
+              style="float:right;"
+              src="https://s2.music.126.net/style/web2/img/index/download.png?2a187643b672eff95d00edffd4ff1e32"
+              alt
+            />
+          </div>
+        </div>
       </div>
-      <el-button round size="small">创作者中心</el-button>
-    </header>
+    </div>
+    <div class="discover">
+      <div class="wrap">
+        <div class="f-wrap">
+          <div class="fl-wrap">
+            <div class="tj">
+              <a href="#">热门推荐</a>
+            </div>
+            <div class="tab">
+              <a href="#">华语</a><span>|</span>
+              <a href="#">流行</a><span>|</span>
+              <a href="#">摇滚</a><span>|</span>
+              <a href="#"></a><span>|</span>
+              <a href="#"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
-  name: "home",
-  components: {
-    HelloWorld
-  },
   data() {
     return {
-      input: ""
+      banner: [
+        "https://p1.music.126.net/nENHcoOyowsSYiWCMIBWlg==/109951164649869118.jpg?imageView&quality=89",
+        "https://p1.music.126.net/9sgXq0JKUCSBxfA93EO6ZA==/109951164649878309.jpg?imageView&quality=89",
+        "https://p1.music.126.net/hQG2HarBdz7SYsZ3VwHlUw==/109951164649877871.jpg?imageView&quality=89",
+        "https://p1.music.126.net/y11AaLYvVNTRpGpaox2uLQ==/109951164649852297.jpg?imageView&quality=89",
+        "https://p1.music.126.net/lDAWIbdq3SAnn_299rDUfw==/109951164649859666.jpg?imageView&quality=89",
+        "https://p1.music.126.net/zw_NCEk9LrvZ9cvlXG_nSg==/109951164649755699.jpg?imageView&quality=89",
+        "https://p1.music.126.net/OoQ3BD7FlexsY1yXvFBiTw==/109951164649861766.jpg?imageView&quality=89",
+        "https://p1.music.126.net/nENHcoOyowsSYiWCMIBWlg==/109951164649869118.jpg?imageView&quality=89"
+      ],
+      bg: [
+        "https://p1.music.126.net/nENHcoOyowsSYiWCMIBWlg==/109951164649869118.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/9sgXq0JKUCSBxfA93EO6ZA==/109951164649878309.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/hQG2HarBdz7SYsZ3VwHlUw==/109951164649877871.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/lDAWIbdq3SAnn_299rDUfw==/109951164649859666.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/zw_NCEk9LrvZ9cvlXG_nSg==/109951164649755699.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/OoQ3BD7FlexsY1yXvFBiTw==/109951164649861766.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/nENHcoOyowsSYiWCMIBWlg==/109951164649869118.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/9sgXq0JKUCSBxfA93EO6ZA==/109951164649878309.jpg?imageView&blur=40x20",
+        "https://p1.music.126.net/hQG2HarBdz7SYsZ3VwHlUw==/109951164649877871.jpg?imageView&blur=40x20"
+      ]
     };
+  },
+  mounted() {
+    console.log(this.$refs.t);
   }
 };
 </script>
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-.header {
-  width: 100%;
-}
-header {
-  display: flex;
-  height: 70px;
-  background: #242424;
-  text-align: center;
-  line-height: 70px;
-  width: 1100px;
+.banner-2 {
+  width: 982px;
+  height: 285px;
   margin: 0 auto;
 }
-ul {
-  list-style: none;
-  display: flex;
-  box-sizing: border-box;
-  width: 508px;
-  box-sizing: border-box;
+.block {
+  width: 730px;
+  height: 285px;
 }
-ul li {
-  
+.el-carousel {
+  width: 100%;
 }
-.el-input {
- 
+h3 img {
+  height: 283px;
+}
+.discover .wrap {
+  width: 980px;
+  min-height: 700px;
+
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #d3d3d3;
+  border-width: 0 1px;
+  overflow: hidden;
+}
+.f-wrap {
+  float: left;
+  width: 100%;
+  margin-right: -250px;
+}
+.fl-wrap {
+  padding: 20px 20px 40px;
+  border: 1px #000 solid;
+  width: 688px;
+}
+.tj {
+  height: 33px;
+  padding: 0 10px 0 34px;
+  background-position: -225px -156px;
+  border-bottom: 2px solid #c10d0c;
+}
+.tj a {
+  float: left;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 28px;
 }
 </style>
