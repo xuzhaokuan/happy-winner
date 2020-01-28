@@ -136,6 +136,19 @@
           </div>
         </div>
       </footer>
+      <div class="kk">
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="登录" name="first">
+      <p><input type="text" v-model="phoneNum" placeholder="请输入手机号" style="margin:0 auto;"></p>
+      <p><input type="password" v-model="password" placeholder="请输入密码"></p>
+       <el-button type="primary" plain size="mini" @click="login">登录</el-button>
+    </el-tab-pane>
+    <el-tab-pane label="注册" name="second">
+
+    </el-tab-pane>
+    
+  </el-tabs>
+      </div>
     </div>
 
     <!-- <div id="nav">
@@ -147,15 +160,34 @@
 </template>
 <script>
 import Header from "../src/views/Home";
+import { get } from './utils/request';
 export default {
   data() {
     return {
-      input: ""
+      input: "",
+      activeName: 'second',
+      phoneNum:'',
+      password:''
     };
   },
   components: {
     // Header
-  }
+  },
+   methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      login(){
+        get('https://autumnfish.cn/login/cellphone?phone='+this.phoneNum+'&password='+this.password)
+        .then(res=>{
+          console.log(res.data)
+          console.log(res.data.token)
+          if(res.data.code==200){
+            localStorage.getItem("token",res.data.token)
+          }
+        })
+      }
+    }
 };
 </script>
 <style>
@@ -334,6 +366,16 @@ footer {
     width: 52px;
     height: 14px;
     
+}
+.kk {
+  position: absolute;
+    z-index: 9998;
+    width: 530px;
+    border-radius: 4px;
+    box-shadow: 0 5px 16px rgba(0,0,0,0.8);
+    border: none;
+    top: 175px;
+    left: 226px;
 }
 </style>
  
