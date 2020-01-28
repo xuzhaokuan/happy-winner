@@ -27,7 +27,7 @@
         <div class="f-wrap">
           <div class="fl-wrap">
             <div class="tj">
-              <a href="#">热门推荐</a>
+              <a href="#" >热门推荐</a>
               <div class="tab">
                 <a href="#">华语</a>
                 <span>|</span>
@@ -52,7 +52,7 @@
                 
                 <div class="bottom">
                   <a href="" class="el-icon-video-play"></a>
-                  <span class="el-icon-headset"></span>
+                  <span class="el-icon-headset" style="margin:5px 0 0 5px;"></span>
                   <span class="nb"></span>
                 </div>
                 </div>
@@ -61,6 +61,58 @@
                 </p>
               </li>
             </ul>
+          </div>
+
+          <div class="new">
+            <div class="xinge">
+              <a href="#" style="font-size:20px;">新碟上架</a>
+              <span class="more">
+                <a href="#">更多</a>
+                <i class="el-icon-right">&nbsp;</i>
+              </span>
+            </div>
+            <div class="disk">
+              <div class="inner">
+                <a href="" class="el-icon-arrow-left"></a>
+                <div class="roll">
+                  <ul class="list-2">
+                    <li v-for="item in disk" :key='item.id'>
+                      <div class="xindie">
+                        <img :src="item.picUrl" alt="">
+                        <a href="" :title="item.name"></a>
+                        <a href=""></a>
+                      </div>
+                      <p class="thide">{{item.name}}</p>
+                      <p>{{item.artist.name}}</p>
+                    </li>
+                  </ul>
+                </div>
+                <a href="" class="el-icon-arrow-right"></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bill">
+             <div class="bill-top">
+              <a href="#" style="font-size:20px;">新碟上架</a>
+              <span class="more">
+                <a href="#">更多</a>
+                <i class="el-icon-right">&nbsp;</i>
+              </span>
+            </div>
+            <div class="n-blist">
+              <dl class="blk">
+                <dt class="top">
+                  <div class="cver">
+                    <img src="" alt="">
+                  <a href="#"></a>
+                  </div>
+                  <div class="tit">
+
+                  </div>
+                </dt>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -84,7 +136,8 @@ export default {
         "https://p1.music.126.net/9sgXq0JKUCSBxfA93EO6ZA==/109951164649878309.jpg?imageView&blur=40x20",
         "https://p1.music.126.net/hQG2HarBdz7SYsZ3VwHlUw==/109951164649877871.jpg?imageView&blur=40x20"
       ],
-      hotlist:[]
+      hotlist:[],
+      disk:[]
     };
   },
   created() {
@@ -94,10 +147,17 @@ export default {
       console.log(res.data.banners)
       this.banner=res.data.banners
     });
+    // 推荐
     get('https://autumnfish.cn/personalized?limit=8')
     .then(res=>{
       console.log(res.data.result);
       this.hotlist=res.data.result
+    });
+    // 新碟上架
+    get('https://autumnfish.cn/top/album?offset=0&limit=20')
+    .then(res=>{
+      console.log(res.data.albums)
+      this.disk=res.data.albums
     })
   },
   mounted() {
@@ -106,6 +166,13 @@ export default {
 };
 </script>
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
 .banner-2 {
   width: 982px;
   height: 285px;
@@ -136,23 +203,25 @@ h3 img {
   width: 100%;
   margin-right: -250px;
 }
-.fl-wrap {
+.fl-wrap,.new,.bill {
   padding: 20px 20px 40px;
   border: 1px #000 solid;
   width: 688px;
   font-size:12px;
 }
-.tj {
+.tj,.xinge,.bill-top {
   height: 33px;
   padding: 0 10px 0 34px;
   background-position: -225px -156px;
   border-bottom: 2px solid #c10d0c;
+   background: url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -235px -155px no-repeat;
 }
 .tj > a {
   float: left;
   font-size: 20px;
   font-weight: normal;
   line-height: 28px;
+ 
 }
 .tab {
   float: left;
@@ -213,6 +282,7 @@ h3 img {
     height: 27px;
     background-position: 0 -537px;
     color: #ccc;
+    background: rgba(000, 000, 000, .5)
 }
 .bottom .el-icon-video-play {
   display: inline-block;
@@ -223,5 +293,84 @@ h3 img {
     height: 17px;
     background-position: 0 0;
     
+}
+.desc a {
+      display: inline-block;
+    max-width: 100%;
+    vertical-align: middle;
+    font-size:14px;
+    color: #000;
+}
+.disk {
+  position: relative;
+    zoom: 1;
+    height: 186px;
+    margin: 20px 0 37px;
+    border: 1px solid #d3d3d3;
+}
+.disk .inner {
+  height: 184px;
+    padding-left: 16px;
+    background: #f5f5f5;
+    border: 1px solid #fff;
+}
+.inner a:nth-of-type(1) {
+  position: absolute;
+    top: 71px;
+    width: 17px;
+    height: 17px;
+    left: 4px;
+}
+.inner a:nth-of-type(2) {
+  position: absolute;
+    top: 71px;
+    width: 17px;
+    height: 17px;
+}
+.roll {
+  float: left;
+    width: 645px;
+    height: 180px;
+    overflow: hidden;
+}
+.roll .list-2 {
+  position: absolute;
+    top: 0;
+    width: 645px;
+    height: 150px;
+    margin: 28px 0 0 0;
+    overflow: hidden;
+}
+.list-2 li {
+  float: left;
+    display: inline-block;
+    width: 118px;
+    height: 150px;
+    margin-left: 11px;
+    background-position: -260px 100px;
+
+}
+.xindie {
+  margin-bottom: 7px;
+  width: 100px;
+  height: 100px;
+}
+.xindie img {
+      display: block;
+    width: 100%;
+    height: 100%;
+}
+.list-2 li p {
+  width: 90%;
+    line-height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+.n-blist {
+      height: 472px;
+    margin-top: 20px;
+    padding-left: 1px;
 }
 </style>
