@@ -27,7 +27,7 @@
         <div class="f-wrap">
           <div class="fl-wrap">
             <div class="tj">
-              <a href="#" >热门推荐</a>
+              <a href="#">热门推荐</a>
               <div class="tab">
                 <a href="#">华语</a>
                 <span>|</span>
@@ -45,19 +45,19 @@
               </span>
             </div>
             <ul class="list-1">
-              <li v-for='item in hotlist' :key='item.id'>
+              <li v-for="item in hotlist" :key="item.id">
                 <div class="u-cover">
-                  <img :src="item.picUrl" alt="" :title="item.name">
-                  <a href="" :title="item.name"></a>
-                
-                <div class="bottom">
-                  <a href="" class="el-icon-video-play"></a>
-                  <span class="el-icon-headset" style="margin:5px 0 0 5px;"></span>
-                  <span class="nb"></span>
-                </div>
+                  <img :src="item.picUrl" alt :title="item.name" />
+                  <a href :title="item.name"></a>
+
+                  <div class="bottom">
+                    <a href class="el-icon-video-play"></a>
+                    <span class="el-icon-headset" style="margin:5px 0 0 5px;"></span>
+                    <span class="nb"></span>
+                  </div>
                 </div>
                 <p class="desc">
-                  <a href="" :title="item.name">{{item.name}}</a>
+                  <a href :title="item.name">{{item.name}}</a>
                 </p>
               </li>
             </ul>
@@ -73,27 +73,27 @@
             </div>
             <div class="disk">
               <div class="inner">
-                <a href="" class="el-icon-arrow-left"></a>
+                <a href class="el-icon-arrow-left"></a>
                 <div class="roll">
                   <ul class="list-2">
-                    <li v-for="item in disk" :key='item.id'>
+                    <li v-for="item in disk" :key="item.id">
                       <div class="xindie">
-                        <img :src="item.picUrl" alt="">
-                        <a href="" :title="item.name"></a>
-                        <a href=""></a>
+                        <img :src="item.picUrl" alt />
+                        <a href :title="item.name"></a>
+                        <a href></a>
                       </div>
                       <p class="thide">{{item.name}}</p>
                       <p>{{item.artist.name}}</p>
                     </li>
                   </ul>
                 </div>
-                <a href="" class="el-icon-arrow-right"></a>
+                <a href class="el-icon-arrow-right"></a>
               </div>
             </div>
           </div>
 
           <div class="bill">
-             <div class="bill-top">
+            <div class="bill-top">
               <a href="#" style="font-size:20px;">新碟上架</a>
               <span class="more">
                 <a href="#">更多</a>
@@ -101,16 +101,80 @@
               </span>
             </div>
             <div class="n-blist">
-              <dl class="blk">
-                <dt class="top">
+              <dl class="blk" style="height:472px; overflow:hidden;">
+                <dt class="top" >
                   <div class="cver">
-                    <img src="" alt="">
-                  <a href="#"></a>
+                    <img :src="this.bs.coverImgUrl" alt="" />
+                    <a href="#" :title="this.bs.name"></a>
                   </div>
                   <div class="tit">
-
+                    <a href="#">
+                      <h3>{{this.bs.name}}</h3>
+                    </a>
+                    <div class="btn">
+                      <a href="#" style="background:url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -267px -205px;">播放</a>
+                      <a href="#" style="background:url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -300px -205px;">收藏</a>
+                    </div>
                   </div>
                 </dt>
+                <dd>
+                  <ol style="height: 319px;margin-left: 50px;line-height: 32px;">
+                    <li style="height: 32px;list-style:none;" v-for="(item,index) in bslist" :key="item.id">
+                      <span>{{index+1}}</span>
+                      <a href="#">{{item.name}}</a>
+                    </li>
+                  </ol>
+                </dd>
+              </dl>
+              <dl class="blk" style="height:472px; overflow:hidden;">
+                <dt class="top" >
+                  <div class="cver">
+                    <img :src="this.new.coverImgUrl" alt="" />
+                    <a href="#" :title="this.new.name"></a>
+                  </div>
+                  <div class="tit">
+                    <a href="#">
+                      <h3>{{this.new.name}}</h3>
+                    </a>
+                    <div class="btn">
+                      <a href="#" style="background:url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -267px -205px;">播放</a>
+                      <a href="#" style="background:url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -300px -205px;">收藏</a>
+                    </div>
+                  </div>
+                </dt>
+                <dd>
+                  <ol style="height: 319px;margin-left: 50px;line-height: 32px;">
+                    <li style="height: 32px;list-style:none;" v-for="(item,index) in newlist" :key="item.id">
+                      <span>{{index+1}}</span>
+                      <a href="#">{{item.name}}</a>
+                    </li>
+                  </ol>
+                </dd>
+              </dl>
+              <dl class="blk" style="width:225px;height:472px;overflow:hidden;">
+                <dt class="top" >
+                  <div class="cver">
+                    <img :src="this.yc.coverImgUrl" alt="" />
+                    <a href="#"></a>
+                  </div>
+                  <div class="tit">
+                    <a href="#" :title="this.yc.name">
+                      <h3>{{this.yc.name}}</h3>
+                    </a>
+                    <div class="btn">
+                      <a href="#" style="background:url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -267px -205px;">播放</a>
+                      <a href="#" style="background:url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -300px -205px;">收藏</a>
+                    </div>
+                  </div>
+                </dt>
+                <dd>
+                  <ol style="height: 319px;margin-left: 50px;line-height: 32px;">
+                    <li style="height: 32px;list-style:none;" v-for="(item,index) in yclist" :key="item.id">
+                      <span>{{index+1}}</span>
+                      <a href="#">{{item.name}}</a>
+                    </li>
+                  </ol>
+                </dd>
               </dl>
             </div>
           </div>
@@ -120,7 +184,7 @@
   </div>
 </template>
 <script>
-import {get} from '../utils/request'
+import { get } from "../utils/request";
 export default {
   data() {
     return {
@@ -136,29 +200,62 @@ export default {
         "https://p1.music.126.net/9sgXq0JKUCSBxfA93EO6ZA==/109951164649878309.jpg?imageView&blur=40x20",
         "https://p1.music.126.net/hQG2HarBdz7SYsZ3VwHlUw==/109951164649877871.jpg?imageView&blur=40x20"
       ],
-      hotlist:[],
-      disk:[]
+      hotlist: [],
+      disk: [],
+      bs:[],
+      bslist:[],
+      new:[],
+      newlist:[],
+      yc:[],
+      yclist:[],
     };
   },
   created() {
     // banner图
-    get('https://autumnfish.cn/banner')
-    .then(res=>{
-      console.log(res.data.banners)
-      this.banner=res.data.banners
+    get("https://autumnfish.cn/banner").then(res => {
+      console.log(res.data.banners);
+      this.banner = res.data.banners;
     });
     // 推荐
-    get('https://autumnfish.cn/personalized?limit=8')
-    .then(res=>{
+    get("https://autumnfish.cn/personalized?limit=8").then(res => {
       console.log(res.data.result);
-      this.hotlist=res.data.result
+      this.hotlist = res.data.result;
     });
     // 新碟上架
-    get('https://autumnfish.cn/top/album?offset=0&limit=20')
-    .then(res=>{
-      console.log(res.data.albums)
-      this.disk=res.data.albums
-    })
+    get("https://autumnfish.cn/top/album?offset=0&limit=20").then(res => {
+      console.log(res.data.albums);
+      this.disk = res.data.albums;
+    });
+    //每日飙升榜
+    get('https://autumnfish.cn/toplist').then(res=>{
+      console.log(res.data.list[0])
+      this.bs=res.data.list[0]
+    });
+    //每日飙升榜歌单
+    get('https://autumnfish.cn/top/list?idx=3').then(res=>{
+      console.log(res.data.playlist.tracks)
+      this.bslist=res.data.playlist.tracks
+    });
+    //云音乐新歌榜
+    get('https://autumnfish.cn/toplist').then(res=>{
+      console.log(res.data.list[1])
+      this.new=res.data.list[1]
+    });
+    //云音乐新歌榜单
+    get('https://autumnfish.cn/top/list?idx=0').then(res=>{
+      console.log(res.data.playlist.tracks)
+      this.newlist=res.data.playlist.tracks
+    });
+    //原创音乐榜
+    get('https://autumnfish.cn/toplist').then(res=>{
+      console.log(res.data.list[2])
+      this.yc=res.data.list[2]
+    });
+    //原创音乐榜歌单
+    get('https://autumnfish.cn/top/list?idx=2').then(res=>{
+      console.log(res.data.playlist.tracks)
+      this.yclist=res.data.playlist.tracks
+    });
   },
   mounted() {
     console.log(this.$refs.t);
@@ -203,25 +300,29 @@ h3 img {
   width: 100%;
   margin-right: -250px;
 }
-.fl-wrap,.new,.bill {
+.fl-wrap,
+.new,
+.bill {
   padding: 20px 20px 40px;
   border: 1px #000 solid;
   width: 688px;
-  font-size:12px;
+  font-size: 12px;
 }
-.tj,.xinge,.bill-top {
+.tj,
+.xinge,
+.bill-top {
   height: 33px;
   padding: 0 10px 0 34px;
   background-position: -225px -156px;
   border-bottom: 2px solid #c10d0c;
-   background: url('https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4') -235px -155px no-repeat;
+  background: url("https://s2.music.126.net/style/web2/img/index/index.png?83c7460d1145a62a5ab10aaea4a067a4") -235px -155px
+    no-repeat;
 }
 .tj > a {
   float: left;
   font-size: 20px;
   font-weight: normal;
   line-height: 28px;
- 
 }
 .tab {
   float: left;
@@ -233,15 +334,15 @@ h3 img {
   color: #ccc;
 }
 .more {
-      float: right;
-    margin-top: 9px;
+  float: right;
+  margin-top: 9px;
 }
 .more i {
   display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-left: 4px;
-    vertical-align: middle;
+  width: 12px;
+  height: 12px;
+  margin-left: 4px;
+  vertical-align: middle;
 }
 .list-1 {
   margin: 20px 0 0 -42px;
@@ -249,106 +350,104 @@ h3 img {
 }
 .list-1 li {
   float: left;
-    
-    width: 140px;
-    height: 188px;
-    overflow: hidden;
-    padding: 0 0 30px 40px;
-    line-height: 1.4;
+
+  width: 140px;
+  height: 188px;
+  overflow: hidden;
+  padding: 0 0 30px 40px;
+  line-height: 1.4;
 }
 .u-cover {
-      width: 140px;
-    height: 140px;
-    position: relative;
-    display: block;
+  width: 140px;
+  height: 140px;
+  position: relative;
+  display: block;
 }
 .u-cover img {
   display: block;
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-.u-cover>a {
+.u-cover > a {
   position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .u-cover .bottom {
-      position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 27px;
-    background-position: 0 -537px;
-    color: #ccc;
-    background: rgba(000, 000, 000, .5)
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 27px;
+  background-position: 0 -537px;
+  color: #ccc;
+  background: rgba(000, 000, 000, 0.5);
 }
 .bottom .el-icon-video-play {
   display: inline-block;
   position: absolute;
-    right: 10px;
-    bottom: 5px;
-    width: 16px;
-    height: 17px;
-    background-position: 0 0;
-    
+  right: 10px;
+  bottom: 5px;
+  width: 16px;
+  height: 17px;
+  background-position: 0 0;
 }
 .desc a {
-      display: inline-block;
-    max-width: 100%;
-    vertical-align: middle;
-    font-size:14px;
-    color: #000;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #000;
 }
 .disk {
   position: relative;
-    zoom: 1;
-    height: 186px;
-    margin: 20px 0 37px;
-    border: 1px solid #d3d3d3;
+  zoom: 1;
+  height: 186px;
+  margin: 20px 0 37px;
+  border: 1px solid #d3d3d3;
 }
 .disk .inner {
   height: 184px;
-    padding-left: 16px;
-    background: #f5f5f5;
-    border: 1px solid #fff;
+  padding-left: 16px;
+  background: #f5f5f5;
+  border: 1px solid #fff;
 }
 .inner a:nth-of-type(1) {
   position: absolute;
-    top: 71px;
-    width: 17px;
-    height: 17px;
-    left: 4px;
+  top: 71px;
+  width: 17px;
+  height: 17px;
+  left: 4px;
 }
 .inner a:nth-of-type(2) {
   position: absolute;
-    top: 71px;
-    width: 17px;
-    height: 17px;
+  top: 71px;
+  width: 17px;
+  height: 17px;
 }
 .roll {
   float: left;
-    width: 645px;
-    height: 180px;
-    overflow: hidden;
+  width: 645px;
+  height: 180px;
+  overflow: hidden;
 }
 .roll .list-2 {
   position: absolute;
-    top: 0;
-    width: 645px;
-    height: 150px;
-    margin: 28px 0 0 0;
-    overflow: hidden;
+  top: 0;
+  width: 645px;
+  height: 150px;
+  margin: 28px 0 0 0;
+  overflow: hidden;
 }
 .list-2 li {
   float: left;
-    display: inline-block;
-    width: 118px;
-    height: 150px;
-    margin-left: 11px;
-    background-position: -260px 100px;
-
+  display: inline-block;
+  width: 118px;
+  height: 150px;
+  margin-left: 11px;
+  background-position: -260px 100px;
 }
 .xindie {
   margin-bottom: 7px;
@@ -356,21 +455,100 @@ h3 img {
   height: 100px;
 }
 .xindie img {
-      display: block;
-    width: 100%;
-    height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .list-2 li p {
   width: 90%;
-    line-height: 18px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+.n-blist {
+  height: 472px;
+  margin-top: 20px;
+  padding-left: 1px;
+}
+.blk {
+  float: left;
+  width: 230px;
+}
+.blk .top {
+  height: 100px;
+  padding: 20px 0 0 19px;
+  
+}
+.top .cver {
+  float: left;
+  
+      width: 80px;
+    height: 80px;
+}
+.cver img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cver a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.tit {
+  float: left;
+  width: 116px;
+  margin: 6px 0 0 10px;
+}
+.tit a {
+  text-decoration: none;
+  color: #333;
+}
+.tit a h3 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+.tit .btn {
+  margin-top: 10px;
+}
+.tit .btn a {
+  display: block;
+    float: left;
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+    text-indent: -9999px;
+}
+dd ol li:nth-child(odd) {
+  background: #ccc;
+}
+dd ol li>span {
+  float: left;
+    position: relative;
+    width: 35px;
+    height: 32px;
+    margin-left: -35px;
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    vertical-align: middle;
+}
+dd ol li>a {
+  float: left;
+    width: 170px;
+    height: 32px;
+    vertical-align: middle;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     word-wrap: normal;
-}
-.n-blist {
-      height: 472px;
-    margin-top: 20px;
-    padding-left: 1px;
+    color: #000;
 }
 </style>
