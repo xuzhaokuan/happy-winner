@@ -41,7 +41,7 @@
       </div>
       <a class="create-btn">创作者中心</a>
       <div class="login">
-        <a href="#">登录</a>
+        <a href="#" @click="show=!show">登录</a>
       </div>
     </div>
     <div class="nav">
@@ -77,129 +77,166 @@
           </li>
         </ul>
       </div>
-      </div>
-      <div class="main">
-  <router-view></router-view>
-      </div>
-      <footer>
-        <div class="wrap">
-          <div class="left">
-            <p class="l-1">
-              <a href="#">服务条款</a>
-              <span>|</span>
-              <a href="#">隐私政策</a>
-              <span>|</span>
-              <a href="#">儿童隐私政策</a>
-              <span>|</span>
-              <a href="#">版权投诉指引</a>
-              <span>|</span>
-              <a href="#">意见反馈</a>
-              <span>|</span>
-            </p>
-            <p class="l-2">
-              <span>网易公司版权所有©1997-2020</span>
-              <span>杭州乐读科技有限公司运营：</span>
-              <a
-                href="https://p1.music.126.net/Mos9LTpl6kYt6YTutA6gjg==/109951164248627501.png"
-              >浙网文[2018]3506-263号</a>
-            </p>
-            <p class="l-3">
-              <span>违法和不良信息举报电话：0571-89853516</span>
-              <span>举报邮箱：</span>
-              <a class="alink" href="mailto:ncm5990@163.com">ncm5990@163.com</a>
-            </p>
-            <p class="l-4">
-              <span>粤B2-20090191-18</span>
-              <span>工业和信息化部备案管理系统网站</span>
-              <a href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action"></a>
-            </p>
-          </div>
-          <div class="right" style="width: 330px; float:right;">
-            <ul style="overflow:hidden;">
-              <li>
-                <a href="//music.163.com/st/userbasic#/auth" ><img src="../src/images/p1.png" style="width:100%;" alt=""></a>
-                <span>用户认证</span>
-              </li>
-              <li style="margin-left:30px;">
-                <a href="//music.163.com/recruit"><img src="../src/images/p2.png" style="width:100%;" alt=""></a>
-                <span>独立音乐人</span>
-              </li>
-              <li style="margin-left:30px;">
-                <a href="//music.163.com/web/reward"><img src="../src/images/p3.png" style="width:100%;" alt=""></a>
-                <span>赞赏</span>
-              </li>
-              <li style="margin-left:30px;">
-                <a href="//music.163.com/uservideo#/plan"><img src="../src/images/p4.png" style="width:100%;" alt=""></a>
-                <span>视频奖励</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-      <div class="kk">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="登录" name="first">
-      <p><input type="text" v-model="phoneNum" placeholder="请输入手机号" style="margin:0 auto;"></p>
-      <p><input type="password" v-model="password" placeholder="请输入密码"></p>
-       <el-button type="primary" plain size="mini" @click="login">登录</el-button>
-    </el-tab-pane>
-    <el-tab-pane label="注册" name="second">
-     <el-input v-model="resignNum" placeholder="请输入手机号"></el-input>
-     <el-input v-model="yanzhengma" placeholder="请输入验证码"></el-input>
-      <el-button round @click="yzm">获取验证码</el-button>
-      <p><el-input v-model="resignPsw" placeholder="请输入密码"></el-input></p>
-      <p><el-input v-model="nickName" placeholder="请输入昵称"></el-input></p>
-    </el-tab-pane>
-    
-  </el-tabs>
-      </div>
     </div>
+    <div class="main">
+      <router-view></router-view>
+    </div>
+    <footer>
+      <div class="wrap">
+        <div class="left">
+          <p class="l-1">
+            <a href="#">服务条款</a>
+            <span>|</span>
+            <a href="#">隐私政策</a>
+            <span>|</span>
+            <a href="#">儿童隐私政策</a>
+            <span>|</span>
+            <a href="#">版权投诉指引</a>
+            <span>|</span>
+            <a href="#">意见反馈</a>
+            <span>|</span>
+          </p>
+          <p class="l-2">
+            <span>网易公司版权所有©1997-2020</span>
+            <span>杭州乐读科技有限公司运营：</span>
+            <a
+              href="https://p1.music.126.net/Mos9LTpl6kYt6YTutA6gjg==/109951164248627501.png"
+            >浙网文[2018]3506-263号</a>
+          </p>
+          <p class="l-3">
+            <span>违法和不良信息举报电话：0571-89853516</span>
+            <span>举报邮箱：</span>
+            <a class="alink" href="mailto:ncm5990@163.com">ncm5990@163.com</a>
+          </p>
+          <p class="l-4">
+            <span>粤B2-20090191-18</span>
+            <span>工业和信息化部备案管理系统网站</span>
+            <a href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action"></a>
+          </p>
+        </div>
+        <div class="right" style="width: 330px; float:right;">
+          <ul style="overflow:hidden;">
+            <li>
+              <a href="//music.163.com/st/userbasic#/auth">
+                <img src="../src/images/p1.png" style="width:100%;" alt />
+              </a>
+              <span>用户认证</span>
+            </li>
+            <li style="margin-left:30px;">
+              <a href="//music.163.com/recruit">
+                <img src="../src/images/p2.png" style="width:100%;" alt />
+              </a>
+              <span>独立音乐人</span>
+            </li>
+            <li style="margin-left:30px;">
+              <a href="//music.163.com/web/reward">
+                <img src="../src/images/p3.png" style="width:100%;" alt />
+              </a>
+              <span>赞赏</span>
+            </li>
+            <li style="margin-left:30px;">
+              <a href="//music.163.com/uservideo#/plan">
+                <img src="../src/images/p4.png" style="width:100%;" alt />
+              </a>
+              <span>视频奖励</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <div class="kk" v-show="show">
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="登录" name="first">
+          <p>
+            <input type="text" v-model="phoneNum" placeholder="请输入手机号" style="margin:0 auto;" />
+          </p>
+          <p>
+            <input type="password" v-model="password" placeholder="请输入密码" />
+          </p>
+          <el-button type="primary" plain size="mini" @click="login">登录</el-button>
+        </el-tab-pane>
+        <el-tab-pane label="注册" name="second">
+          <el-input v-model="resignNum" placeholder="请输入手机号"></el-input>
+          <el-input v-model="yanzhengma" placeholder="请输入验证码"></el-input>
+          <el-button round @click="yzm">获取验证码</el-button>
+          <p>
+            <el-input v-model="resignPsw" placeholder="请输入密码"></el-input>
+          </p>
+          <p>
+            <el-input v-model="nickName" placeholder="请输入昵称"></el-input>
+          </p>
+          <el-button round @click="resign">注册</el-button>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+  </div>
 
-    <!-- <div id="nav">
+  <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>-->
-    <!-- <router-view /> -->
-  
+  </div>-->
+  <!-- <router-view /> -->
 </template>
 <script>
 import Header from "../src/views/Home";
-import { get } from './utils/request';
+import { get } from "./utils/request";
 export default {
   data() {
     return {
       input: "",
-      activeName: 'second',
-      phoneNum:'',
-      password:'',
-      resignNum:'',
-      yanzhengma:'',
+      activeName: "second",
+      phoneNum: "",
+      password: "",
+      resignNum: "",
+      yanzhengma: "",
+      resignPsw: "",
+      nickName: "",
+      show: false
     };
   },
   components: {
     // Header
   },
-   methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      },
-      login(){
-        get('https://autumnfish.cn/login/cellphone?phone='+this.phoneNum+'&password='+this.password)
-        .then(res=>{
-          console.log(res.data)
-          console.log(res.data.token)
-          if(res.data.code==200){
-            localStorage.getItem("token",res.data.token)
-          }
-        })
-      },
-      yzm(){
-        get('https://autumnfish.cn/captcha/sent?phone='+this.resignNum)
-        .then(res=>{
-          console.log(res.data)
-        })
-      }
+  methods: {
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
+    login() {
+      get(
+        "https://autumnfish.cn/login/cellphone?phone=" +
+          this.phoneNum +
+          "&password=" +
+          this.password
+      ).then(res => {
+        console.log(res.data);
+        console.log(res.data.token);
+        if (res.data.code == 200) {
+          localStorage.getItem("token", res.data.token);
+        }
+      });
+    },
+    yzm() {
+      get("https://autumnfish.cn/captcha/sent?phone=" + this.resignNum).then(
+        res => {
+          console.log(res.data);
+        }
+      );
+    },
+    resign() {
+      get(
+        "https://autumnfish.cn/register/cellphone?phone=" +
+          this.resignNum +
+          "&password=" +
+          this.resignPsw +
+          "&captcha=" +
+          this.yanzhengma +
+          "&nickname=" +
+          this.nickName
+      ).then(res => {
+        console.log(res.data);
+      });
     }
+  }
 };
 </script>
 <style>
@@ -312,16 +349,15 @@ ul {
   border-radius: 20px;
 }
 .main {
-
   background: skyblue;
 }
 footer {
   font-size: 12px;
   position: relative;
-    height: 172px;
-    overflow: hidden;
-    border-top: 1px solid #d3d3d3;
-    background: #f2f2f2;
+  height: 172px;
+  overflow: hidden;
+  border-top: 1px solid #d3d3d3;
+  background: #f2f2f2;
 }
 
 .wrap {
@@ -374,20 +410,19 @@ footer {
 }
 .right ul li span {
   display: inline-block;
-    margin: 5px 5px 0;
-    width: 52px;
-    height: 14px;
-    
+  margin: 5px 5px 0;
+  width: 52px;
+  height: 14px;
 }
 .kk {
   position: absolute;
-    z-index: 9998;
-    width: 530px;
-    border-radius: 4px;
-    box-shadow: 0 5px 16px rgba(0,0,0,0.8);
-    border: none;
-    top: 175px;
-    left: 226px;
+  z-index: 9998;
+  width: 530px;
+  border-radius: 4px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);
+  border: none;
+  top: 175px;
+  left: 226px;
 }
 </style>
  
