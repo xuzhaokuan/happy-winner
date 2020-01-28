@@ -144,7 +144,11 @@
        <el-button type="primary" plain size="mini" @click="login">登录</el-button>
     </el-tab-pane>
     <el-tab-pane label="注册" name="second">
-
+     <el-input v-model="resignNum" placeholder="请输入手机号"></el-input>
+     <el-input v-model="yanzhengma" placeholder="请输入验证码"></el-input>
+      <el-button round @click="yzm">获取验证码</el-button>
+      <p><el-input v-model="resignPsw" placeholder="请输入密码"></el-input></p>
+      <p><el-input v-model="nickName" placeholder="请输入昵称"></el-input></p>
     </el-tab-pane>
     
   </el-tabs>
@@ -167,7 +171,9 @@ export default {
       input: "",
       activeName: 'second',
       phoneNum:'',
-      password:''
+      password:'',
+      resignNum:'',
+      yanzhengma:'',
     };
   },
   components: {
@@ -185,6 +191,12 @@ export default {
           if(res.data.code==200){
             localStorage.getItem("token",res.data.token)
           }
+        })
+      },
+      yzm(){
+        get('https://autumnfish.cn/captcha/sent?phone='+this.resignNum)
+        .then(res=>{
+          console.log(res.data)
         })
       }
     }
