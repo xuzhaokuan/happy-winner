@@ -37,9 +37,17 @@
         </li>
       </ul>
       <div class="search">
-        <input type="" name="" id="" value="" autocomplete="off" v-model="input" @keyup.enter="serchMusic" />
-        <ul>
-          <li></li>
+        <input type name id value autocomplete="off" v-model="input" @keyup.enter="serchMusic" @blur="search" @focus="chuxian" />
+        <ul style="width:160px; position:absolute;z-index:999;max-height:200px;overflow:hidden;background:#fff;" v-if="isShow">
+          <li v-for="item in musicList" :key="item.id" style="float:none;height:20px;font-size:12px;">
+            <a
+              style="font-size:14px;width:80%;display:inline-block;overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;"
+              href="#"
+            >{{item.name}}</a>
+          </li>
         </ul>
       </div>
       <a class="create-btn">创作者中心</a>
@@ -195,7 +203,8 @@ export default {
       yanzhengma: "",
       resignPsw: "",
       nickName: "",
-      show: false
+      show: false,
+      isShow:true
     };
   },
   components: {
@@ -240,14 +249,21 @@ export default {
         console.log(res.data);
       });
     },
-    serchMusic(){
-      console.log(this.input)
-      get("https://autumnfish.cn/search?keywords=" + this.input).then(
-        res => {
-          console.log(res.data.result.songs);
-					this.musicList = res.data.result.songs
+    serchMusic() {
+      this.isShow=true
+      get("https://autumnfish.cn/search?keywords=" + this.input).then(res => {
+        console.log(res.data.result.songs);
+        this.musicList = res.data.result.songs;
+        if(this.input==null){
+          this.musicList=[]
         }
-      );
+      });
+    },
+    search(){
+      this.isShow=false
+    },
+    chuxian(){
+      this.isShow=true
     }
   }
 };
