@@ -105,7 +105,7 @@
                 <dt class="top" >
                   <div class="cver">
                     <img :src="this.bs.coverImgUrl" alt="" />
-                    <a href="#" :title="this.bs.name"></a>
+                    <!-- <a href="#" :title="this.bs.name"></a> -->
                   </div>
                   <div class="tit">
                     <a href="#">
@@ -130,7 +130,7 @@
                 <dt class="top" >
                   <div class="cver">
                     <img :src="this.new.coverImgUrl" alt="" />
-                    <a href="#" :title="this.new.name"></a>
+                    <!-- <a href="#" :title="this.new.name"></a> -->
                   </div>
                   <div class="tit">
                     <a href="#">
@@ -155,7 +155,7 @@
                 <dt class="top" >
                   <div class="cver">
                     <img :src="this.yc.coverImgUrl" alt="" />
-                    <a href="#"></a>
+                    <!-- <a href="#"></a> -->
                   </div>
                   <div class="tit">
                     <a href="#" :title="this.yc.name">

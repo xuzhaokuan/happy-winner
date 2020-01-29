@@ -37,7 +37,10 @@
         </li>
       </ul>
       <div class="search">
-        <el-input prefix-icon="el-icon-search" v-model="input" placeholder="音乐/视频/电台/用户"></el-input>
+        <input type="" name="" id="" value="" autocomplete="off" v-model="input" @keyup.enter="serchMusic" />
+        <ul>
+          <li></li>
+        </ul>
       </div>
       <a class="create-btn">创作者中心</a>
       <div class="login">
@@ -184,6 +187,7 @@ export default {
   data() {
     return {
       input: "",
+      musicList: [],
       activeName: "second",
       phoneNum: "",
       password: "",
@@ -235,6 +239,15 @@ export default {
       ).then(res => {
         console.log(res.data);
       });
+    },
+    serchMusic(){
+      console.log(this.input)
+      get("https://autumnfish.cn/search?keywords=" + this.input).then(
+        res => {
+          console.log(res.data.result.songs);
+					this.musicList = res.data.result.songs
+        }
+      );
     }
   }
 };
