@@ -37,16 +37,45 @@
         </li>
       </ul>
       <div class="search">
-        <input type name id value autocomplete="off" v-model="input" @keyup.enter="serchMusic" @blur="search" @focus="chuxian" />
-        <ul style="width:160px; position:absolute;z-index:999;max-height:200px;overflow:hidden;background:#fff;" v-if="isShow">
+        <input
+          type
+          name
+          id
+          value
+          autocomplete="off"
+          v-model="input"
+          @keyup.enter="serchMusic"
+          @blur.stop="search"
+          @focus="chuxian"
+        />
+        <!-- <ul style="width:200px; position:absolute;z-index:999;max-height:300px;overflow:hidden;background:#fff;" v-if="isShow">
           <li v-for="item in musicList" :key="item.id" style="float:none;height:20px;font-size:12px;">
-            <a
-              style="font-size:14px;width:80%;display:inline-block;overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: normal;"
-              href="#"
-            >{{item.name}}</a>
+            <a href="javascript:;" @click="playMusic(item.id)">播放</a> <b>{{item.name}}</b><span v-if="item.mvid!=0" @click="playMV(item.mvid)" style=" width: 23px;height: 17px; margin-right: 50px; border: 1px #000 solid;"><i style="background: url(./table.png) left -48px no-repeat;display: block;
+  width: 100%;
+  height: 17px;
+  cursor: pointer;"></i></span>
+          </li>
+        </ul>-->
+        <ul
+          class="musiclist"
+          style="width:200px; position:absolute;z-index:999;max-height:300px;overflow:hidden;background:#fff;"
+          v-if="isShow"
+        >
+          <li v-for="item in musicList" style="height:40px;font-size:12px;" :key="item.id">
+            <a href="javascript:;" @click.stop="playMusic(item.id)">播放</a>
+            <b>{{item.name}}</b>
+            <span
+              v-if="item.mvid!=0"
+              @click="playMV(item.mvid)"
+              style=" width: 23px;height: 17px; margin-right: 50px; border: 1px #000 solid;"
+            >
+              <i
+                style="background: url(./table.png) left -48px no-repeat;display: block;
+  width: 100%;
+  height: 17px;
+  cursor: pointer;"
+              ></i>
+            </span>
           </li>
         </ul>
       </div>
@@ -180,6 +209,9 @@
         </el-tab-pane>
       </el-tabs>
     </div>
+    <div class="audio_con">
+      <audio :src="musicUrl" @play="play" @pause="pause" controls autoplay loop class="myaudio"></audio>
+    </div>
   </div>
 
   <!-- <div id="nav">
@@ -204,7 +236,11 @@ export default {
       resignPsw: "",
       nickName: "",
       show: false,
-      isShow:true
+      isShow: true,
+      // 歌曲地址
+      musicUrl: "",
+      //动画播放状态
+      isPlaying: false
     };
   },
   components: {
@@ -250,20 +286,40 @@ export default {
       });
     },
     serchMusic() {
-      this.isShow=true
+      this.isShow = true;
       get("https://autumnfish.cn/search?keywords=" + this.input).then(res => {
         console.log(res.data.result.songs);
         this.musicList = res.data.result.songs;
-        if(this.input==null){
-          this.musicList=[]
+        if (this.input == "") {
+          this.musicList = [];
         }
       });
     },
-    search(){
-      this.isShow=false
+    search() {
+      this.isShow = false;
     },
-    chuxian(){
-      this.isShow=true
+    chuxian() {
+      this.isShow = true;
+    },
+    //歌曲url的获取
+    playMusic(musicId) {
+      console.log(musicId);
+      get("https://autumnfish.cn/song/url?id=" + musicId)
+        .then(res => {
+          console.log(res.data.data[0].url);
+          this.musicUrl = res.data.data[0].url;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    play: function() {
+      console.log("play");
+      this.isPlaying = true;
+    },
+    pause: function() {
+      console.log("pause");
+      this.isPlaying = false;
     }
   }
 };
