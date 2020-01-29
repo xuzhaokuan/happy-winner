@@ -88,11 +88,11 @@
       <div class="nav-in">
         <ul>
           <li>
-            <router-link :to="{name:'home'}">推荐</router-link>
+            <em><router-link :to="{name:'home'}">推荐</router-link></em>
           </li>
           <li>
             <a href="#">
-              <em>排行榜</em>
+              <em><router-link :to="{name:'toplist'}">排行榜</router-link></em>
             </a>
           </li>
           <li>
