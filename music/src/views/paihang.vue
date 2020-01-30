@@ -53,6 +53,21 @@
                         </div>
                     </li>
                 </ul>
+                <h2>全球媒体榜</h2>
+                <ul>
+                    <li v-for="item in all.slice(4)" :key="item.id">
+                        <div class="it">
+                            <div class="fl">
+                                <a href="javascript:;">
+                                    <img :src="item.coverImgUrl" alt="">
+                                    <span class="msk"></span>
+                                </a>
+                            </div>
+                            <p class="name"><a href="#" style="white-space: nowrap;">{{item.name}}</a></p>
+                            <p class="updata">{{item.updateFrequency}}</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="right-list">
@@ -68,30 +83,36 @@ export default {
             bs:[],
             new:[],
             yc:[],
-            hot:[]
+            hot:[],
+            all:[]
         }
     },
     created() {
         //云音乐飙升榜
         get('https://autumnfish.cn/top/list?idx=3').then(res=>{
-            console.log(res.data.playlist)
+            // console.log(res.data.playlist)
             this.bs=res.data.playlist
         });
         //云音乐新歌榜
         get('https://autumnfish.cn/top/list?idx=0').then(res=>{
-            console.log(res.data.playlist)
+            // console.log(res.data.playlist)
             this.new=res.data.playlist
         });
         //网易原创歌曲榜
         get('https://autumnfish.cn/top/list?idx=2').then(res=>{
-            console.log(res.data.playlist)
+            // console.log(res.data.playlist)
             this.yc=res.data.playlist
         });
         //云音乐热歌榜
          get('https://autumnfish.cn/top/list?idx=1').then(res=>{
-            console.log(res.data.playlist)
+            // console.log(res.data.playlist)
             this.hot=res.data.playlist
         });
+        //总榜
+        get('https://autumnfish.cn/toplist').then(res=>{
+            console.log(res.data.list)
+            this.all=res.data.list
+        })
     },
 }
 </script>
@@ -102,6 +123,7 @@ export default {
     margin: 0 auto;
     border-right: 1px #000 solid;
     border-left:1px #000 solid; 
+    overflow: hidden;
 }
 .left-list {
     position: static;
