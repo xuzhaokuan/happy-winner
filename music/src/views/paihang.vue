@@ -12,7 +12,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><a href="#" style="white-space: nowrap;">{{this.bs.name}}</a></p>
+                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.bs.id}}">{{this.bs.name}}</router-link></p>
                             <p class="updata">每天更新</p>
                         </div>
                     </li>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="right-list">
-
+            <router-view></router-view>
         </div>
     </div>
 </template>
