@@ -12,7 +12,7 @@
         </li>
         <li>
           <span>
-            <a href="#">我的音乐</a>
+            <router-link :to="{name:'mymusic'}">我的音乐</router-link>
           </span>
         </li>
         <li>
@@ -269,7 +269,8 @@ export default {
         console.log(res.data);
         console.log(res.data.token);
         if (res.data.code == 200) {
-          localStorage.getItem("token", res.data.token);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem('id',res.data.account.id)
         }
       });
     },
@@ -458,6 +459,7 @@ ul {
 }
 .main {
   background: skyblue;
+  min-height: 700px;
 }
 footer {
   font-size: 12px;

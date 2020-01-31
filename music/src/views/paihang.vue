@@ -24,7 +24,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><a href="#" style="white-space: nowrap;">{{this.new.name}}</a></p>
+                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.new.id}}">{{this.new.name}}</router-link></p>
                             <p class="updata">每天更新</p>
                         </div>
                     </li>
@@ -36,7 +36,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><a href="#" style="white-space: nowrap;">{{this.yc.name}}</a></p>
+                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.yc.id}}">{{this.yc.name}}</router-link></p>
                             <p class="updata">每周四更新</p>
                         </div>
                     </li>
@@ -48,7 +48,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><a href="#" style="white-space: nowrap;">{{this.hot.name}}</a></p>
+                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.hot.id}}">{{this.hot.name}}</router-link></p>
                             <p class="updata">刚刚更新</p>
                         </div>
                     </li>
@@ -63,7 +63,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><a href="#" style="white-space: nowrap;">{{item.name}}</a></p>
+                            <p class="name"><router-link :to="{name:'toplistright',params:{id:item.id}}">{{item.name}}</router-link></p>
                             <p class="updata">{{item.updateFrequency}}</p>
                         </div>
                     </li>
