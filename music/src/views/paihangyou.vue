@@ -181,7 +181,7 @@ export default {
     	playMV(mvid) {
 					get('https://autumnfish.cn/mv/url?id='+mvid).then(res => {
 							console.log(res.data.data.url);
-							this.isShow=true
+							this.$store.state.mvShow=true
 							this.$store.state.mvUrl=res.data.data.url
 						}).catch(err => {
 							console.log(err);
@@ -349,7 +349,7 @@ export default {
 }
 .m-table .ply {
   position: relative;
-  z-index: 999;
+  z-index: 980;
   margin-top: 17px;
   margin-right: 8px;
   float: left;

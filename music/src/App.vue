@@ -212,7 +212,7 @@
     <div class="audio_con">
       <audio :src="$store.state.musicUrl" @play="play" @pause="pause" controls autoplay loop class="myaudio"></audio>
     </div>
-    <div class="video_con" v-show="mvShow" style="display: none;">
+    <div class="video_con" v-show="$store.state.mvShow" style="display: none;">
 					<video :src="$store.state.mvUrl" controls="controls">
 					
 					</video>
@@ -249,7 +249,7 @@ export default {
       // musicUrl: "",
       //动画播放状态
       isPlaying: false,
-      mvShow:false
+      
     };
   },
   components: {
@@ -335,14 +335,14 @@ export default {
 					playMV(mvid) {
 					get('https://autumnfish.cn/mv/url?id='+mvid).then(res => {
 							console.log(res.data.data.url);
-							this.mvShow=true
+							this.$store.state.mvShow=true
 							this.$store.state.mvUrl=res.data.data.url
 						}).catch(err => {
 							console.log(err);
 						})
 					},
 					hide:function(){
-						this.mvShow=false
+						this.$store.state.mvShow=false
 					}
   }
 };
