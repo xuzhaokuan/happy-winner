@@ -45,7 +45,7 @@
           autocomplete="off"
           v-model="input"
           @keyup.enter="serchMusic"
-          @blur.stop="search"
+          
           @focus="chuxian"
         />
         <!-- <ul style="width:200px; position:absolute;z-index:999;max-height:300px;overflow:hidden;background:#fff;" v-if="isShow">
@@ -62,7 +62,7 @@
           v-if="isShow"
         >
           <li v-for="item in musicList" style="height:40px;font-size:12px;" :key="item.id">
-            <a href="javascript:;" @click.stop="playMusic(item.id)">播放</a>
+            <a href="javascript:;" @click="playMusic(item.id)">播放</a>
             <b>{{item.name}}</b>
             <span
               v-if="item.mvid!=0"
@@ -210,8 +210,16 @@
       </el-tabs>
     </div>
     <div class="audio_con">
-      <audio :src="musicUrl" @play="play" @pause="pause" controls autoplay loop class="myaudio"></audio>
+      <audio :src="$store.state.musicUrl" @play="play" @pause="pause" controls autoplay loop class="myaudio"></audio>
     </div>
+    <div class="video_con" v-show="mvShow" style="display: none;">
+					<video :src="$store.state.mvUrl" controls="controls">
+					
+					</video>
+					<div class="mask" @click="hide">
+						
+					</div>
+				</div>
   </div>
 
   <!-- <div id="nav">
@@ -238,9 +246,10 @@ export default {
       show: false,
       isShow: true,
       // 歌曲地址
-      musicUrl: "",
+      // musicUrl: "",
       //动画播放状态
-      isPlaying: false
+      isPlaying: false,
+      mvShow:false
     };
   },
   components: {
@@ -292,6 +301,7 @@ export default {
         this.musicList = res.data.result.songs;
         if (this.input == "") {
           this.musicList = [];
+          this.isShow = false;
         }
       });
     },
@@ -307,7 +317,7 @@ export default {
       get("https://autumnfish.cn/song/url?id=" + musicId)
         .then(res => {
           console.log(res.data.data[0].url);
-          this.musicUrl = res.data.data[0].url;
+          this.$store.state.musicUrl = res.data.data[0].url;
         })
         .catch(err => {
           console.log(err);
@@ -320,7 +330,20 @@ export default {
     pause: function() {
       console.log("pause");
       this.isPlaying = false;
-    }
+    },
+    //播放MV
+					playMV(mvid) {
+					get('https://autumnfish.cn/mv/url?id='+mvid).then(res => {
+							console.log(res.data.data.url);
+							this.mvShow=true
+							this.$store.state.mvUrl=res.data.data.url
+						}).catch(err => {
+							console.log(err);
+						})
+					},
+					hide:function(){
+						this.mvShow=false
+					}
   }
 };
 </script>
@@ -509,5 +532,24 @@ footer {
   top: 175px;
   left: 226px;
 }
+.video_con video {
+			  position: fixed;
+			  width: 800px;
+			  height: 546px;
+			  left: 50%;
+			  top: 50%;
+			  margin-top: -273px;
+			  transform: translateX(-50%);
+			  z-index: 990;
+			}
+			.video_con .mask {
+			  position: fixed;
+			  width: 100%;
+			  height: 100%;
+			  left: 0;
+			  top: 0;
+			  z-index: 980;
+			  background-color: rgba(0, 0, 0, 0.8);
+			}
 </style>
  

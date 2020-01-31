@@ -129,7 +129,7 @@ export default {
     position: static;
     float: left;
     width: 240px;
-    border-right: 1px #000 solid;
+    /* border-right: 1px #000 solid; */
 }
 .left-list .top {
     margin-top: 40px;

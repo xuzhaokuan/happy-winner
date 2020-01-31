@@ -88,12 +88,44 @@
       <div class="song-list">
         <div>
           <div class="j-flag">
-            <el-table :data="tableData" stripe style="width: 100%">
-              <el-table-column type="index" width="77"></el-table-column>
-              <el-table-column prop="name" label="标题" width="372"></el-table-column>
-              <el-table-column prop="address" label="时长" width="90"></el-table-column>
-              <el-table-column prop="ar[0].name" label="歌手" width="173"></el-table-column>
-            </el-table>
+            <table class="m-table">
+              <thead>
+                <tr>
+                  <th class="wp1"></th>
+                  <th><div class="wp2">标题</div></th>
+                  <th style="width:91px;"><div class="wp3">时长</div></th>
+                  <th style="width:26%;"><div class="wp4">歌手</div></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item,index) in tableData" :key="item.id">
+                  <td><div class="rank"><span class="num">{{index+1}}</span></div></td>
+                  <td class="name">
+                    <div class="f-cb">
+                      <div class="tt">
+                        <a href="javascript:;">
+                          <img :src="item.al.picUrl" alt="" :title="item.name">
+                        </a>
+                        <span class="ply" @click="playMusic(item.id)">&nbsp;</span>
+                        <div class="ttc">
+                          <a href="javascript:;">{{item.name}}</a>
+                          <span class="mv" @click="playMV(item.mv)" v-if="item.mv!=0">&nbsp;</span>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="u-dur"></span>
+                  </td>
+                  <td>
+                    <div class="text">
+                      {{item.ar[0].name}}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -106,21 +138,55 @@ export default {
   data() {
     return {
         tableData:[],
-        id:[]
+        id:[],
+        // 歌曲地址
+      // musicUrl: "",
+      //动画播放状态
+      isPlaying: false
     };
   },
   created() {
       console.log(this.$route.params.id)
+      //获取歌单详情
       get('https://autumnfish.cn/playlist/detail?id='+this.$route.params.id).then(res=>{
-          console.log(res.data.playlist.trackIds);
+          console.log(res.data.playlist.tracks);
           this.tableData=res.data.playlist.tracks
           this.id=res.data.playlist.trackIds
       });
-      get('https://autumnfish.cn/song/detail',{
-          params:{id:this.id}
-      }).then(res=>{
+      get('https://autumnfish.cn/song/detail?ids=1418602229').then(res=>{
           console.log(res.data)
-      })
+      });
+  },
+  methods: {
+    //歌曲url的获取
+    playMusic(musicId) {
+      console.log(musicId);
+      get("https://autumnfish.cn/song/url?id=" + musicId)
+        .then(res => {
+          console.log(res.data.data[0].url);
+          this.$store.state.musicUrl = res.data.data[0].url;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    play: function() {
+      console.log("play");
+      this.isPlaying = true;
+    },
+    pause: function() {
+      console.log("pause");
+      this.isPlaying = false;
+    },
+    	playMV(mvid) {
+					get('https://autumnfish.cn/mv/url?id='+mvid).then(res => {
+							console.log(res.data.data.url);
+							this.isShow=true
+							this.$store.state.mvUrl=res.data.data.url
+						}).catch(err => {
+							console.log(err);
+						})
+					},
   },
 };
 </script>
@@ -214,5 +280,116 @@ export default {
   text-align: left;
   font-size: inherit;
   color: #fff;
+}
+.m-table {
+  width: 100%;
+    border: 1px solid #d9d9d9;
+        border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: 12px;
+}
+.m-table a {
+  text-decoration: none;
+  color: #333;
+}
+.m-table th {
+  height: 38px;
+    background-color: #f7f7f7;
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    vertical-align: top;
+    text-align: left;
+    font-weight: normal;
+    color: #666;
+}
+.wp1 {
+  width: 77px;
+}
+.wp2,.wp3,.wp4 {
+  height: 18px;
+    line-height: 18px;
+    padding: 8px 10px;
+    background-position: 0 -56px;
+    background: url(https://s2.music.126.net/style/web2/img/table.png?340a18cba63491e994a5cc1951b2fc3d) no-repeat 0 9999px;
+}
+.m-table td {
+      background-color: #f7f7f7;
+          padding: 6px 10px;
+    line-height: 18px;
+    text-align: left;
+    background: url(https://s2.music.126.net/style/web2/img/table.png?340a18cba63491e994a5cc1951b2fc3d) no-repeat 0 9999px;
+}
+.rank {
+  height: 18px;
+}
+.rank .num {
+  float: left;
+    width: 25px;
+    margin-left: 0;
+    text-align: center;
+    color: #999;
+}
+.name {
+      padding-top: 10px;
+    padding-bottom: 10px;
+}
+.m-table .tt {
+  float: left;
+    width: 100%;
+}
+.m-table a {
+  cursor: pointer;
+}
+.m-table img {
+  float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 14px;
+}
+.m-table .ply {
+  position: relative;
+  z-index: 999;
+  margin-top: 17px;
+  margin-right: 8px;
+  float: left;
+  width: 17px;
+    height: 17px;
+    cursor: pointer;
+    background-position: 0 -103px;
+    background: url(https://s2.music.126.net/style/web2/img/table.png?340a18cba63491e994a5cc1951b2fc3d) 0 243px;
+}
+.m-table .ttc {
+  margin-top: 16px;
+  height: 18px;
+    margin-right: 20px;
+    position: relative;
+}
+.ttc a {
+  position: relative;
+    display: inline-block;
+    padding-right: 25px;
+    margin-right: -25px;
+    max-width: 67%;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ttc .mv {
+  position: absolute;
+    top: 0;
+    right: 0;
+    float: left;
+    overflow: hidden;
+    cursor: pointer;
+        width: 23px;
+    height: 17px;
+    margin: 1px 0 0 0;
+   
+    background: url(https://s2.music.126.net/style/web2/img/table.png?340a18cba63491e994a5cc1951b2fc3d)  0 217px;
+}
+.m-table .u-dur {
+  color: #666;
 }
 </style>
