@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     musicUrl: "",
     mvUrl:'',
-    mvShow:false
+    mvShow:false,
+    
   },
   mutations: {
   },

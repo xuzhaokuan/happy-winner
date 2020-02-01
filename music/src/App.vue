@@ -459,7 +459,7 @@ ul {
 }
 .main {
   background: skyblue;
-  min-height: 700px;
+ 
 }
 footer {
   font-size: 12px;

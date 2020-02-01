@@ -6,22 +6,26 @@
         <a href="javascript:;" class="btn">立即登录</a>
       </div>
     </div>
-    <div class="musci">
+    <div class="music">
       <div class="left">
         <div class="lf-list">
           <div class="create-list">
             <el-collapse v-model="activeNames" @change="handleChange">
               <el-collapse-item title="创建的歌单" name="1">
                 <ul class="j-flag">
-                  <li v-for="item in toplist" :key="item.id" v-show="item.creator.nickname==user.profile.nickname">
+                  <li
+                    v-for="item in toplist"
+                    :key="item.id"
+                    v-show="item.creator.nickname==user.profile.nickname"
+                  >
                     <div class="f-cb">
                       <div class="lf">
                         <a href="javascript:;" class="avatar">
-                          <img :src='item.coverImgUrl' alt />
+                          <img :src="item.coverImgUrl" alt />
                         </a>
                       </div>
                       <p class="s-fc">
-                        <a href="javascript:;">{{item.name}}</a>
+                        <router-link :to="{name:'mylistright',params:{p:item.id}}">{{item.name}}</router-link>
                       </p>
                       <p class="num">{{item.trackCount}}首</p>
                     </div>
@@ -30,15 +34,19 @@
               </el-collapse-item>
               <el-collapse-item title="喜欢的歌单" name="2">
                 <ul class="j-flag">
-                  <li v-for="item in toplist" :key="item.id" v-show="item.creator.nickname!==user.profile.nickname">
+                  <li
+                    v-for="item in toplist"
+                    :key="item.id"
+                    v-show="item.creator.nickname!==user.profile.nickname"
+                  >
                     <div class="f-cb">
                       <div class="lf">
                         <a href="javascript:;" class="avatar">
-                          <img :src='item.coverImgUrl' alt />
+                          <img :src="item.coverImgUrl" alt />
                         </a>
                       </div>
                       <p class="s-fc">
-                        <a href="javascript:;">{{item.name}}</a>
+                        <router-link :to="{name:'mylistright',params:{p:item.id}}">{{item.name}}</router-link>
                       </p>
                       <p class="num">{{item.trackCount}}首&nbsp;by</p>
                     </div>
@@ -49,40 +57,45 @@
           </div>
         </div>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import {get} from '../utils/request'
+import { get } from "../utils/request";
 export default {
   data() {
     return {
       activeNames: ["1"],
-      show:true,
-      user:{},
-      toplist:[],
-      bottomlist:[]
+      show: true,
+      user: {},
+      toplist: [],
+      bottomlist: []
     };
   },
   created() {
-      console.log(localStorage.getItem('id'))
-      if(localStorage.getItem('id')){
-          this.show=false
-      }
-     
+    console.log(localStorage.getItem("id"));
+    if (localStorage.getItem("id")) {
+      this.show = false;
+    }
   },
   mounted() {
-      //获取用户详情
-       get('https://autumnfish.cn/user/detail?uid='+localStorage.getItem('id')).then(res=>{
-          console.log(res.data)
-          this.user=res.data
-      });
-      //获取用户歌单
-      get('https://autumnfish.cn/user/playlist?uid='+localStorage.getItem('id')).then(res=>{
-          console.log(res.data)
-          this.toplist=res.data.playlist
-      })
+    //获取用户详情
+    get(
+      "https://autumnfish.cn/user/detail?uid=" + localStorage.getItem("id")
+    ).then(res => {
+      console.log(res.data);
+      this.user = res.data;
+    });
+    //获取用户歌单
+    get(
+      "https://autumnfish.cn/user/playlist?uid=" + localStorage.getItem("id")
+    ).then(res => {
+      console.log(res.data);
+      this.toplist = res.data.playlist;
+    });
   },
   methods: {
     handleChange(val) {
@@ -94,6 +107,12 @@ export default {
 <style scoped>
 .mymusic {
   height: 100%;
+  overflow: hidden;
+  width: 982px;
+  margin: 0 auto;
+}
+.music {
+    overflow: hidden;
 }
 .n-pglg {
   width: 807px;
@@ -127,7 +146,6 @@ export default {
   padding-top: 40px;
   float: left;
   width: 240px;
-  position: fixed;
 }
 .left .lf-list {
   font-size: 12px;
@@ -147,40 +165,46 @@ export default {
   color: #333;
 }
 .j-flag .f-cb {
-    padding-left: 50px;
+  padding-left: 50px;
 }
 .f-cb .lf {
-    display: inline;
-    float: left;
-    margin-left: -50px;
-    overflow: hidden;
-    width: 40px;
+  display: inline;
+  float: left;
+  margin-left: -50px;
+  overflow: hidden;
+  width: 40px;
 }
 .avatar {
-        display: block;
-    position: relative;
-    width: 40px;
-    height: 40px;
+  display: block;
+  position: relative;
+  width: 40px;
+  height: 40px;
 }
 .avatar img {
-        width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 .s-fc {
-    width: 150px;
-    overflow: hidden;
-    margin-top: 2px;
-    margin-bottom: 8px;
-    line-height: 1;
+  width: 150px;
+  overflow: hidden;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  line-height: 1;
 }
 .s-fc a {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 .num {
-    width: 130px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
+  width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+.right {
+  height: 100%;
+  float: right;
+  width: 720px;
+  padding-bottom: 50px;
 }
 </style>
