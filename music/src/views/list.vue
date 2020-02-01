@@ -12,6 +12,7 @@
           <div class="create-list">
             <el-collapse v-model="activeNames" @change="handleChange">
               <el-collapse-item title="创建的歌单" name="1">
+                  <input type="text" v-model="name" ><el-button size="mini" round @click="addlist">新建歌单</el-button>
                 <ul class="j-flag">
                   <li
                     v-for="item in toplist"
@@ -64,7 +65,7 @@
   </div>
 </template>
 <script>
-import { get } from "../utils/request";
+import { get,post } from "../utils/request";
 export default {
   data() {
     return {
@@ -73,7 +74,8 @@ export default {
       user: {},
       toplist: [],
       bottomlist: [],
-      sh:true
+      sh:true,
+      name:''
     };
   },
   created() {
@@ -108,6 +110,14 @@ export default {
    },
    add(){
        this.reload()
+   },
+   addlist(){
+       get('https://autumnfish.cn/playlist/create?name='+this.name,{
+           withCredentials: true
+       })
+       .then(res=>{
+           console.log(res.data)
+       })
    }
   },
   
