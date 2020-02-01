@@ -12,7 +12,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.bs.id}}">{{this.bs.name}}</router-link></p>
+                            <p class="name"><router-link :to="{name:'toplistright',query:{id:this.bs.id}}" @click.native="add">{{this.bs.name}}</router-link></p>
                             <p class="updata">每天更新</p>
                         </div>
                     </li>
@@ -24,7 +24,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.new.id}}">{{this.new.name}}</router-link></p>
+                            <p class="name"><router-link :to="{name:'toplistright',query:{id:this.new.id}}" @click.native="add">{{this.new.name}}</router-link></p>
                             <p class="updata">每天更新</p>
                         </div>
                     </li>
@@ -36,7 +36,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.yc.id}}">{{this.yc.name}}</router-link></p>
+                            <p class="name"><router-link :to="{name:'toplistright',query:{id:this.yc.id}}" @click.native="add">{{this.yc.name}}</router-link></p>
                             <p class="updata">每周四更新</p>
                         </div>
                     </li>
@@ -48,7 +48,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><router-link :to="{name:'toplistright',params:{id:this.hot.id}}">{{this.hot.name}}</router-link></p>
+                            <p class="name"><router-link :to="{name:'toplistright',query:{id:this.hot.id}}" @click.native="add">{{this.hot.name}}</router-link></p>
                             <p class="updata">刚刚更新</p>
                         </div>
                     </li>
@@ -63,7 +63,7 @@
                                     <span class="msk"></span>
                                 </a>
                             </div>
-                            <p class="name"><router-link :to="{name:'toplistright',params:{id:item.id}}">{{item.name}}</router-link></p>
+                            <p class="name"><router-link :to="{name:'toplistright',query:{id:item.id}}" @click.native="add">{{item.name}}</router-link></p>
                             <p class="updata">{{item.updateFrequency}}</p>
                         </div>
                     </li>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="right-list">
-            <router-view></router-view>
+            <router-view v-if="sh"></router-view>
         </div>
     </div>
 </template>
@@ -84,7 +84,8 @@ export default {
             new:[],
             yc:[],
             hot:[],
-            all:[]
+            all:[],
+            sh:true
         }
     },
     created() {
@@ -113,6 +114,15 @@ export default {
             console.log(res.data.list)
             this.all=res.data.list
         })
+    },
+    methods: {
+        reload () {
+     this.sh = false
+     this.$nextTick(() => (this.sh = true))
+   },
+   add(){
+       this.reload()
+   }
     },
 }
 </script>

@@ -116,7 +116,7 @@
                     </div>
                   </td>
                   <td>
-                    <span class="u-dur"></span>
+                    <span class="u-dur">删除</span>
                   </td>
                   <td>
                     <div class="text">
@@ -142,13 +142,15 @@ export default {
         // 歌曲地址
       // musicUrl: "",
       //动画播放状态
-      isPlaying: false
+      isPlaying: false,
     };
   },
   created() {
+      console.log(1)
       console.log(this.$route.params.id)
+      
       //获取歌单详情
-      get('https://autumnfish.cn/playlist/detail?id='+this.$route.params.id).then(res=>{
+      get('https://autumnfish.cn/playlist/detail?id='+this.$route.query.id).then(res=>{
           console.log(res.data.playlist.tracks);
           this.tableData=res.data.playlist.tracks
           this.id=res.data.playlist.trackIds
@@ -157,6 +159,7 @@ export default {
           console.log(res.data)
       });
   },
+  
   methods: {
     //歌曲url的获取
     playMusic(musicId) {

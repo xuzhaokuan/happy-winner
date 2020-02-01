@@ -25,7 +25,7 @@
                         </a>
                       </div>
                       <p class="s-fc">
-                        <router-link :to="{name:'mylistright',params:{p:item.id}}">{{item.name}}</router-link>
+                       <router-link :to="{name:'mylistright',query:{id:item.id}}" @click.native="add">{{item.name}}</router-link>
                       </p>
                       <p class="num">{{item.trackCount}}首</p>
                     </div>
@@ -46,7 +46,7 @@
                         </a>
                       </div>
                       <p class="s-fc">
-                        <router-link :to="{name:'mylistright',params:{p:item.id}}">{{item.name}}</router-link>
+                        <router-link :to="{name:'mylistright',query:{id:item.id}}" @click.native="add">{{item.name}}</router-link>
                       </p>
                       <p class="num">{{item.trackCount}}首&nbsp;by</p>
                     </div>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="right">
-        <router-view></router-view>
+        <router-view v-if="sh"></router-view>
       </div>
     </div>
   </div>
@@ -72,7 +72,8 @@ export default {
       show: true,
       user: {},
       toplist: [],
-      bottomlist: []
+      bottomlist: [],
+      sh:true
     };
   },
   created() {
@@ -100,8 +101,16 @@ export default {
   methods: {
     handleChange(val) {
       console.log(val);
-    }
-  }
+    },
+   reload () {
+     this.sh = false
+     this.$nextTick(() => (this.sh = true))
+   },
+   add(){
+       this.reload()
+   }
+  },
+  
 };
 </script>
 <style scoped>
