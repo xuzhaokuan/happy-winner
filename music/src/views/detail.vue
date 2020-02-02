@@ -28,7 +28,7 @@
                                 <el-button type="danger" icon="el-icon-video-play" circle></el-button>
                             </div>
                             <div class="lyric">
-
+                                {{lyric}}
                             </div>
                         </div>
                     </div>
@@ -42,10 +42,13 @@
 </template>
 <script>
 import {get} from '../utils/request'
+import Lyirc from 'lyric-parser'
   export default {
       data() {
           return {
-              detail:''
+              detail:'',
+              lyric:'',
+              currentLyric: null  // 设置一个歌词维护属性
           }
       },
       created() {
@@ -55,6 +58,13 @@ import {get} from '../utils/request'
               this.detail=res.data.songs[0]
           });
           //获取歌词
+          get('https://autumnfish.cn/lyric?id='+this.$route.query.p)
+          .then(res=>{
+              console.log(res.data)
+            
+              this.lyric=res.data.lrc.lyric
+              
+          })
       },
     methods: {
       open() {
@@ -73,7 +83,7 @@ import {get} from '../utils/request'
 </script>
 <style scoped>
 .detail {
-    width: 980px;
+    width: 709px;
     min-height: 700px;
     margin: 0 auto;
     border: 1px solid #d3d3d3;
@@ -90,11 +100,13 @@ import {get} from '../utils/request'
     margin-right: 271px;
 }
 .wrap {
-    padding: 47px 30px 40px 39px;
+    /* padding: 47px 30px 40px 39px; */
+    padding-top: 47px;
 }
 .m-lyc {
     margin-top: -10px;
     overflow: hidden;
+    width: 709px
 }
 .f-cb {
   float: left;
@@ -190,7 +202,7 @@ font-size: 12px;
     height: 31px;
 }
 .lyric {
-    height: auto;
+    
     margin-top: 13px;
     line-height: 23px;
     word-wrap: break-word;

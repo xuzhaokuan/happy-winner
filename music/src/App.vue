@@ -458,7 +458,7 @@ ul {
   border-radius: 20px;
 }
 .main {
-  background: skyblue;
+  
  
 }
 footer {
