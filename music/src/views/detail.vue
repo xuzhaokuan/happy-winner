@@ -6,26 +6,26 @@
                     <div class="m-lyc">
                         <div class="f-cb">
                             <div class="pic">
-                                <img src="" alt="">
+                                <img :src="detail.al.picUrl" alt="">
                                 <span class="msk"></span>
                             </div>
                             <div class="out">
                                 <i class="out-1"></i>
-                                <el-button type="text" @click="open">生成外链播放器</el-button>
+                                <el-button type="text" @click="open" style="padding:0;">生成外链播放器</el-button>
                             </div>
                         </div>
                         <div class="cnt">
                             <div class="hd">
                                 <i class="lab"></i>
                                 <div class="title">
-                                    <em class="f-ff2"></em>
+                                    <em class="f-ff2">{{detail.name}}</em>
                                     <a href="javascript:;" title="播放MV" style="cursor: pointer;text-decoration: none;color: #333;"><i style="width: 21px;height: 18px;background-position: 0 -18px;display: inline-block;overflow: hidden;background:url('https://s2.music.126.net/style/web2/img/icon.png?92d1333936f403b7616b5ec6fdfbdac4') no-repeat 0 9999px;"></i></a>
                                 </div>
                             </div>
-                            <p class="desc">歌手:<span title=""></span></p>
-                            <p class="desc">所属专辑:<span title=""></span></p>
+                            <p class="desc">歌手:<span title="">{{detail.ar[0].name}}</span></p>
+                            <p class="desc">所属专辑:<span title="">{{detail.alia}}</span></p>
                             <div class="m-info">
-                                <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                                <el-button type="danger" icon="el-icon-video-play" circle></el-button>
                             </div>
                             <div class="lyric">
 
@@ -45,14 +45,16 @@ import {get} from '../utils/request'
   export default {
       data() {
           return {
-              
+              detail:''
           }
       },
       created() {
           get('https://autumnfish.cn/song/detail?ids='+this.$route.query.p)
           .then(res=>{
-              console.log(res.data)
-          })
+              console.log(res.data.songs[0])
+              this.detail=res.data.songs[0]
+          });
+          //获取歌词
       },
     methods: {
       open() {
@@ -92,6 +94,7 @@ import {get} from '../utils/request'
 }
 .m-lyc {
     margin-top: -10px;
+    overflow: hidden;
 }
 .f-cb {
   float: left;
@@ -99,6 +102,7 @@ import {get} from '../utils/request'
     margin-right: -226px;
     position: relative;
     zoom: 1;
+    font-size: 12px;
 }
 .pic {
       width: 198px;
@@ -118,9 +122,9 @@ width: 130px;
     height: 205px;
     top: -4px;
     left: -4px;
-    background-position: -140px -580px;
+   
     position: absolute;
-    background: url('https://s2.music.126.net/style/web2/img/coverall.png?d0e39cc72a4323ecb40e02f5d0a982db') no-repeat;
+    background: url('https://s2.music.126.net/style/web2/img/coverall.png?d0e39cc72a4323ecb40e02f5d0a982db') no-repeat -144px -584px;
 }
 .f-cb .out {
     float: left;
@@ -130,11 +134,10 @@ width: 130px;
 .f-cb .out .out-1 {
     width: 16px;
     height: 16px;
-    background-position: -34px -863px;
         display: inline-block;
     overflow: hidden;
     vertical-align: middle;
-    background: url('https://s2.music.126.net/style/web2/img/icon.png?92d1333936f403b7616b5ec6fdfbdac4') no-repeat 0 9999px;
+    background: url('https://s2.music.126.net/style/web2/img/icon.png?92d1333936f403b7616b5ec6fdfbdac4') no-repeat -34px -863px;
     float: left;
     font-style: normal;
     text-align: left;
@@ -158,6 +161,7 @@ font-size: 12px;
     font-style: normal;
     text-align: left;
     font-size: inherit;
+    background: url('https://s2.music.126.net/style/web2/img/icon.png?92d1333936f403b7616b5ec6fdfbdac4') no-repeat 0 -463px;
 }
 .hd .title {
     margin-left: 64px;
