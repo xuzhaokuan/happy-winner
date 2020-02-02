@@ -108,7 +108,7 @@
                         </a>
                         <span class="ply" @click="playMusic(item.id)">&nbsp;</span>
                         <div class="ttc">
-                          <a href="javascript:;">{{item.name}}</a>
+                          <router-link :to="{name:'song',query:{p:item.id}}">{{item.name}}</router-link>
                           <span class="mv" @click="playMV(item.mv)" v-if="item.mv!=0">&nbsp;</span>
                         </div>
                         
