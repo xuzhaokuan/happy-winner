@@ -66,6 +66,7 @@
 </template>
 <script>
 import { get,post } from "../utils/request";
+import aixos from 'axios'
 export default {
   data() {
     return {
@@ -112,9 +113,7 @@ export default {
        this.reload()
    },
    addlist(){
-       get('https://autumnfish.cn/playlist/create?name='+this.name,{
-           withCredentials: true
-       })
+       get('https://autumnfish.cn/playlist/create?name='+this.name)
        .then(res=>{
            console.log(res.data)
        })
